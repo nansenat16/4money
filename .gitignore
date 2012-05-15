@@ -7,3 +7,5 @@ pdf/images
 pdf/js
 .DS_Store
 Gemfile.lock
+
+adminer.php

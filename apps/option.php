@@ -73,8 +73,6 @@ $app->post('/ajax_save_options', function() use ($app) {
         'company_phone',
         'company_fax',
         'company_addr',
-        'company_email',
-        'company_username',
         'bank_company_title',
         'bank_name',
         'bank_code',

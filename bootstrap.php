@@ -10,6 +10,8 @@ $pdf_enable = (file_exists($WKHTMLTOPDF_BIN_PATH)) ? TRUE : FALSE;
 define('PROJECT_PATH', dirname(__FILE__).DIRECTORY_SEPARATOR);
 define('WKHTMLTOPDF_BIN_PATH', $WKHTMLTOPDF_BIN_PATH);
 define('PDF_ENABLE', $pdf_enable);
+define('SECURITY_LEVEL',$SECURITY_LEVEL);
+define('QUOTATION_ADMIN',serialize($QUOTATION_ADMIN));
 
 ORM::configure("mysql:dbname=$DB_NAME;host=$DB_HOST");
 ORM::configure('username', $DB_USER);
@@ -20,11 +22,12 @@ ORM::configure('id_column_overrides', array(
     'customer'  => 'customer_id',
     'quotation' => 'quotation_id',
     'option'    => 'option_id',
+	'account'   => 'acc_name',
 ));
 
 $slim_settings = array(
     'mode'               => 'production',
-    'debug'              => false, 
+    'debug'              => true, 
     'log.enable'         => true,
     'view'               => new HaangaView('./lib/Haanga', './tpl', './tpl_cache'),
     'templates.path'     => './tpl',
