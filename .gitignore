@@ -1,6 +1,6 @@
 *~
 *.swp
-tpl_cache/*.php
+tpl_cache/*
 logs/*.log
 pdf/*.html
 pdf/images

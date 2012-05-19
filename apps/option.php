@@ -1,7 +1,7 @@
 <?php
 
-// option app hook 
-$app->hook('get_options', function($option_keys) {
+// option app function
+function get_options($option_keys){
     $options = array();
 
     foreach ($option_keys as $ok) {
@@ -10,18 +10,16 @@ $app->hook('get_options', function($option_keys) {
     }
 
     return $options;
-});
+}
 
-$app->hook('render_option_defaut_value', function($data_keys) {
+function render_option_defaut_value($data_keys) {
     $data = array();
-
     foreach ($data_keys as $k => $v) {
         $tmp = ORM::for_table('option')->where('option_key', $k)->find_one();
         $data[$k] = ($tmp) ? $tmp->option_value : '請輸入'.$v;
     }
-
-    return $data;
-});
+	return $data;
+}
 
 // option CRUD
 $app->get('/company_options', function() use ($app) {
@@ -36,7 +34,7 @@ $app->get('/company_options', function() use ($app) {
         'breadcrumb_title' => '公司資料',
     );
 
-    $data = $app->applyHook('render_option_defaut_value', $data_keys);
+	$data=render_option_defaut_value($data_keys);
 
     $app->render('company_options.html', $data);
 });
@@ -50,7 +48,7 @@ $app->get('/bank_options', function() use ($app) {
         'breadcrumb_title'   => '銀行帳戶',
     );
 
-    $data = $app->applyHook('render_option_defaut_value', $data_keys);
+    $data=render_option_defaut_value($data_keys);
 
     $app->render('bank_options.html', $data);
 });
@@ -61,7 +59,7 @@ $app->get('/advance_options', function() use ($app) {
         'breadcrumb_title'    => '進階設定',
     );
 
-    $data = $app->applyHook('render_option_defaut_value', $data_keys);
+    $data=render_option_defaut_value($data_keys);
 
     $app->render('advance_options.html', $data);
 });
