@@ -1,5 +1,6 @@
 <?php
 $app->get('/user_mgr', function() use ($app) {
+	$app->applyHook('account.check_sysadmin');
 	$status_words=array('enable'=>'啟用','disable'=>'停用');
 	$type_words=AUTH::get_support_auth_type();
 	$tpl=array('breadcrumb_title'=>'帳號管理','status_words'=>$status_words,'type_words'=>$type_words);
@@ -21,12 +22,14 @@ $app->get('/user_mgr', function() use ($app) {
  * 新增
  */
 $app->get('/user_add', function() use ($app) {
+	$app->applyHook('account.check_sysadmin');
 	$type_words=AUTH::get_support_auth_type();
 	$tpl=array('breadcrumb_title'=>'新增帳號','type_words'=>$type_words);
 	$app->render('user_mgr_add.html',$tpl);
 });
 
 $app->post('/ajax_user_add', function() use ($app){
+	$app->applyHook('account.check_sysadmin');
 	$post = $app->request()->post();
 	$msg='';
 	if($post['account_id']==''){
@@ -69,6 +72,7 @@ $app->post('/ajax_user_add', function() use ($app){
  * 修改
  */
 $app->get('/user_edit/:id', function($id) use ($app) {
+	$app->applyHook('account.check_sysadmin');
 	$status_words=array('enable'=>'啟用','disable'=>'停用');
 	$type_words=AUTH::get_support_auth_type();
 	$user=ORM::for_table('account')->where('acc_name',$id)->find_one();
@@ -79,6 +83,7 @@ $app->get('/user_edit/:id', function($id) use ($app) {
 });
 
 $app->post('/ajax_user_edit', function() use ($app){
+	$app->applyHook('account.check_sysadmin');
 	$post = $app->request()->post();
 	$msg='';
 	$acc_count=ORM::for_table('account')->where('acc_name',$post['account_id'])->count();
@@ -113,6 +118,7 @@ $app->post('/ajax_user_edit', function() use ($app){
  * 刪除
  */
 $app->get('/user_delete/:id', function($id) use ($app) {
+	$app->applyHook('account.check_sysadmin');
 	$type_words=AUTH::get_support_auth_type();
 	$tpl=array('breadcrumb_title'=>'刪除帳號','type_words'=>$type_words);
 	
@@ -131,6 +137,7 @@ $app->get('/user_delete/:id', function($id) use ($app) {
 });
 
 $app->post('/ajax_user_delete', function() use ($app) {
+	$app->applyHook('account.check_sysadmin');
 	$post = $app->request()->post();
 	$user = ORM::for_table('account')->where('acc_name',$post['id'])->find_one();
 	

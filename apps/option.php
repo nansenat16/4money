@@ -23,6 +23,7 @@ function render_option_defaut_value($data_keys) {
 
 // option CRUD
 $app->get('/company_options', function() use ($app) {
+	$app->applyHook('account.check_sysadmin');
     $data_keys = array(
         'company_name'     => '公司名稱',
         'company_id'       => '公司統編',
@@ -40,6 +41,7 @@ $app->get('/company_options', function() use ($app) {
 });
 
 $app->get('/bank_options', function() use ($app) {
+	$app->applyHook('account.check_sysadmin');
     $data_keys = array(
         'bank_company_title' => '公司戶名',
         'bank_name'          => '銀行',
@@ -54,7 +56,7 @@ $app->get('/bank_options', function() use ($app) {
 });
 
 $app->get('/advance_options', function() use ($app) {
-
+	$app->applyHook('account.check_sysadmin');
     $data_keys = array(
         'quotation_id_prefix' => '報價單前綴編號或文字',
         'breadcrumb_title'    => '進階設定',
@@ -68,6 +70,7 @@ $app->get('/advance_options', function() use ($app) {
 });
 
 $app->post('/ajax_save_options_auth', function() use ($app) {
+	$app->applyHook('account.check_sysadmin');
 	$options = array(
 		'auth_pop3_host',
 		'auth_pop3_msg'
@@ -93,6 +96,7 @@ $app->post('/ajax_save_options_auth', function() use ($app) {
 });
 
 $app->post('/ajax_save_options', function() use ($app) {
+	$app->applyHook('account.check_sysadmin');
     $options = array(
         'company_name', 
         'company_id', 

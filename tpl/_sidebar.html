@@ -13,6 +13,7 @@
 	<ul>
 		<li class="icn_profile"><a href="{{doc_root}}/profile">偏好設定</a></li>
 	</ul>
+	{% if session_uid in SYSTEM_ADMIN %}
     <h3>系統設定</h3>
     <ul>
         <li class="icn_folder"><a href="{{doc_root}}/company_options">公司資料</a></li>
@@ -23,6 +24,7 @@
 		<li class="icn_profile"><a href="{{doc_root}}/user_mgr">帳號管理</a></li>
 		{% endif %}
     </ul>
+	{% endif %}
 </div>
 <script type="text/javascript">
 $(function() {

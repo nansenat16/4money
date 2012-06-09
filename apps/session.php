@@ -115,11 +115,11 @@ class AUTH{
 	}
 }
 
-
 $app->hook('slim.before', function() use ($app) {
 	if(isset($_SESSION['auth']) && $_SESSION['auth']==true){
 		$app->view()->setData('session_uid',$_SESSION['auth_uid']);
 		$app->view()->setData('SECURITY_LEVEL',SECURITY_LEVEL);
+		$app->view()->setData('SYSTEM_ADMIN',unserialize(SYSTEM_ADMIN));
 	}else{
 		$login_res=array('/login','/css/layout.css');
 		if(!in_array($app->config('curr_url'),$login_res)){
@@ -131,6 +131,22 @@ $app->hook('slim.before', function() use ($app) {
 				ob_end_flush();//訊息太短沒有這個會輸出兩次訊息 on php 5.4.1
 				$app->stop();
 			}
+		}
+	}
+});
+
+$app->hook('account.check_sysadmin', function() use ($app) {
+	if(!in_array($_SESSION['auth_uid'],unserialize(SYSTEM_ADMIN))){
+		if($app->request()->getMethod()=='GET'){
+			ob_end_flush();
+			$app->render('access_denied.html', array('breadcrumb_title' => '404'));
+			ob_end_flush();
+			$app->stop();
+		}else{
+			ob_end_flush();
+			$app->render('_notice.html', array('class' => 'error','msg'   => '權限不足'));
+			ob_end_flush();
+			$app->stop();
 		}
 	}
 });

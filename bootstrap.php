@@ -11,6 +11,7 @@ define('PROJECT_PATH', dirname(__FILE__).DIRECTORY_SEPARATOR);
 define('WKHTMLTOPDF_BIN_PATH', $WKHTMLTOPDF_BIN_PATH);
 define('PDF_ENABLE', $pdf_enable);
 define('SECURITY_LEVEL',$SECURITY_LEVEL);
+define('SYSTEM_ADMIN',serialize($SYSTEM_ADMIN));
 define('QUOTATION_ADMIN',serialize($QUOTATION_ADMIN));
 
 ORM::configure("mysql:dbname=$DB_NAME;host=$DB_HOST");
