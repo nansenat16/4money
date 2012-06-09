@@ -60,6 +60,7 @@ $(function() {
     <header>
         <h3>變更密碼</h3>
     </header>
+	{% if user.acc_auth_type == "db" %}
     <div class="module_content">
 		<form id="_form_pwd" class="wufoo">
 			<ul>
@@ -94,6 +95,13 @@ $(function() {
 		</form>
 		<div id="show_notice" style="display:none;"></div>
     </div>
+	{% elseif user.acc_auth_type == "pop3" %}
+	<div class="module_content">
+	{% autoescape false %}
+		{{ option['auth_pop3_msg'] }}
+	{% endautoescape %}
+	</div>
+	{% endif %}
 </article>
 <script type="text/javascript">
 $(function() {

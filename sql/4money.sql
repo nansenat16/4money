@@ -62,10 +62,10 @@ CREATE TABLE `customer` (
 DROP TABLE IF EXISTS `account`;
 CREATE TABLE IF NOT EXISTS `account` (
   `acc_name` varchar(32) NOT NULL,
-  `acc_pwd` text NOT NULL,
-  `acc_salt` text NOT NULL,
-  `acc_auth_type` set('db','ad') NOT NULL DEFAULT 'db',
-  `acc_flag` set('enable','disable','locked') NOT NULL DEFAULT 'disable',
+  `acc_pwd` text,
+  `acc_salt` text,
+  `acc_auth_type` set('db','pop3') NOT NULL DEFAULT 'db',
+  `acc_flag` set('enable','disable') NOT NULL DEFAULT 'disable',
   `acc_company` text,
   PRIMARY KEY  (`acc_name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

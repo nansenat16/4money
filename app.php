@@ -12,4 +12,5 @@ require 'apps/customer.php';
 require 'apps/not_found.php';
 require 'apps/session.php';
 require 'apps/profile.php';
+require 'apps/user_mgr.php';
 ?>

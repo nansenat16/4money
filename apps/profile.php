@@ -1,8 +1,17 @@
 <?php
 $app->get('/profile', function() use ($app) {
 	$tpl=array('breadcrumb_title'=>'偏好設定');
-	
+
 	$user=ORM::for_table('account')->where('acc_name',$_SESSION['auth_uid'])->find_one();
+	$tpl['user']=$user;
+
+	$opt=array();
+	$tmp=ORM::for_table('option')->where_like('option_key', 'auth_%')->find_many();
+	foreach($tmp as $item){
+		$opt[$item->option_key]=$item->option_value;
+	}
+	$tpl['option']=$opt;
+
 	$info=unserialize($user->acc_company);
 	if(is_array($info)){
 		while($k=key($info)){
