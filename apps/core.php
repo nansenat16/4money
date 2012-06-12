@@ -1,7 +1,6 @@
 <?php
 $headers = $app->request()->headers();
 $curr_url = $app->request()->getResourceUri();
-//die($curr_url);
 $doc_root = $app->request()->getRootUri();
 $protocal = (isset($_SERVER['HTTPS']) && (strtolower($_SERVER['HTTPS']) != 'off')) ? 'https' : 'http';
 $full_doc_root = $protocal.'://'.$headers['HOST'].$doc_root;
